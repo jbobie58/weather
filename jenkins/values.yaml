@@ -1,0 +1,31 @@
+# values.yaml
+image:
+  repository: jenkins/jenkins
+  tag: lts-jdk11
+
+service:
+  type: NodePort
+  port: 8080
+
+
+ingress:
+  ingressName: inadev
+  loadBalancerName: inadev
+  ingressClass: alb
+  loadBalancerScheme: internet-facing
+  healthCheckProtocol: HTTP
+  healthCheckPort: traffic-port
+  healthCheckIntervalSeconds: 15
+  healthCheckTimeoutSeconds: 5
+  successCodes: 200
+  healthyThresholdCount: 2
+  unhealthyThresholdCount: 2
+  sslPorts:
+    # - HTTPS: 443
+    - HTTP: 80
+  certificateArn: "arn:aws:acm:xxxxx"
+  sslPolicy: ELBSecurityPolicy-TLS-1-1-2017-01
+  sslRedirect: 443
+  # externalDnsHostname: xxxx.com
+  ingressClassName: inadev
+# Add any additional configurations you need
