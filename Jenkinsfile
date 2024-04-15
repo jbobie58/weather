@@ -11,7 +11,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("-f weather-microservice/Dockerfile .")
+                    // Modify the Docker image name to adhere to naming rules
+                    def dockerImageName = 'weather'
+                    docker.build("-f weather-microservice/Dockerfile -t ${dockerImageName} .")
                 }
             }
         }
