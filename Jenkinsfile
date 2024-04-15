@@ -7,7 +7,6 @@ pipeline {
         DOCKER_HUB_USERNAME = credentials('DOCKER_HUB_USERNAME')
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
         DOCKER_IMAGE_NAME = 'weather'
-        DOCKER_IMAGE_TAG = '0.2'
     }
     
     stages {
@@ -21,7 +20,7 @@ pipeline {
             steps {
                 script {
                     def dockerfileDir = "/var/jenkins_home/workspace/weather_main/weather-microservice"
-                    def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    def dockerImageName = "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                     
                     // Build Docker image from the local Dockerfile
                     sh "docker build -t ${dockerImageName} ${dockerfileDir}"
@@ -40,8 +39,8 @@ pipeline {
         stage('Tag Docker Image') {
             steps {
                 script {
-                    def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-                    def taggedImageName = "${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    def dockerImageName = "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+                    def taggedImageName = "${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                     
                     // Tag the Docker image
                     sh "docker tag ${dockerImageName} ${taggedImageName}"
@@ -52,7 +51,7 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    def taggedImageName = "${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    def taggedImageName = "${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                     
                     // Push the Docker image to Docker Hub
                     sh "docker push ${taggedImageName}"
