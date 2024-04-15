@@ -7,7 +7,7 @@ pipeline {
         DOCKER_HUB_USERNAME = credentials('docker-hub-username-id')
         DOCKER_HUB_PASSWORD = credentials('docker-hub-password-id')
         DOCKER_IMAGE_NAME = 'weather'
-        DOCKER_IMAGE_TAG = 'latest'
+        DOCKER_IMAGE_TAG = '0.2'
     }
     
     stages {
