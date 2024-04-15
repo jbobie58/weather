@@ -12,10 +12,10 @@ pipeline {
             steps {
                 script {
                     def dockerfileDir = "/var/jenkins_home/workspace/weather_main/weather-microservice"
-                    def dockerImageName = 'weather'
+                    def dockerImageName = 'weather:latest' // You can specify the tag here
                     
-                    // Build Docker image from the local Dockerfile
-                    docker.build("-f ${dockerfileDir}/Dockerfile -t ${dockerImageName} .")
+                    // Build Docker image from the local Dockerfile using sh
+                    sh "docker build -t ${dockerImageName} ${dockerfileDir}"
                 }
                 // script {
                 //     // Modify the Docker image name to adhere to naming rules
