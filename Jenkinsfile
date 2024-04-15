@@ -33,7 +33,7 @@ pipeline {
                 script {
                     def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                     
-                    docker.withRegistry('https://hub.docker.com/repository/', DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD) {
+                    docker.withRegistry('https://hub.docker.com/repository/docker/jbobie/weather/', DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD) {
                         // Push the Docker image to Docker Hub
                         docker.image(dockerImageName).push()
                     }
