@@ -26,6 +26,18 @@ pipeline {
                 }
             }
         }
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
+                        // Push the Docker image to Docker Hub
+                        docker.image(dockerImageName).push()
+                    }
+                }
+            }
+        }
     }
     
     post {
