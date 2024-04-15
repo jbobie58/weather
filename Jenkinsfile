@@ -28,15 +28,34 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image to Docker Hub') {
+        stage('Log in to Docker Hub') {
+            steps {
+                script {
+                    // Log in to Docker Hub
+                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                }
+            }
+        }
+        
+        stage('Tag Docker Image') {
             steps {
                 script {
                     def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    def taggedImageName = "${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                     
-                    docker.withRegistry('https://hub.docker.com/repository/docker/jbobie/weather/', DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD) {
-                        // Push the Docker image to Docker Hub
-                        docker.image(dockerImageName).push()
-                    }
+                    // Tag the Docker image
+                    sh "docker tag ${dockerImageName} ${taggedImageName}"
+                }
+            }
+        }
+        
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    def taggedImageName = "${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    
+                    // Push the Docker image to Docker Hub
+                    sh "docker push ${taggedImageName}"
                 }
             }
         }
