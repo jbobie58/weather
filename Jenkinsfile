@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Log in to Docker Hub
-                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                    sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
                 }
             }
         }
