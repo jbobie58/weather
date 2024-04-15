@@ -13,7 +13,7 @@ hpipeline {
                 script {
                     def dockerfileDir = "/var/jenkins_home/workspace/weather_main/weather-microservice"
                     def dockerImageName = 'weather:0.1'
-                    echo "Hello"
+                    
                     // Build Docker image from the local Dockerfile
                     // docker.build("-f ${dockerfileDir}/Dockerfile -t ${dockerImageName} .")
                 }
