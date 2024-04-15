@@ -7,6 +7,14 @@ pipeline {
                 echo 'This is a testing stage.'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("-f weather-microservice/Dockerfile .")
+                }
+            }
+        }
     }
     
     post {
