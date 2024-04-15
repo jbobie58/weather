@@ -1,4 +1,4 @@
-pipeline {
+hpipeline {
     agent any
     
     stages {
@@ -13,9 +13,9 @@ pipeline {
                 script {
                     def dockerfileDir = "/var/jenkins_home/workspace/weather_main/weather-microservice"
                     def dockerImageName = 'weather:0.1'
-                    
+                    echo "Hello"
                     // Build Docker image from the local Dockerfile
-                    docker.build("-f ${dockerfileDir}/Dockerfile -t ${dockerImageName} .")
+                    // docker.build("-f ${dockerfileDir}/Dockerfile -t ${dockerImageName} .")
                 }
                 // script {
                 //     // Modify the Docker image name to adhere to naming rules
