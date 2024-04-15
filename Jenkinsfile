@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Modify the Docker image name to adhere to naming rules
-                    def dockerImageName = 'weather:0.1'
+                    def dockerImageName = 'weather:5'
                     docker.build("-f weather-microservice/Dockerfile -t ${dockerImageName} .")
                 }
             }
