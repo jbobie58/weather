@@ -5,8 +5,8 @@ pipeline {
         // Define your Docker Hub credentials
         // DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
         DOCKER_HUB_USERNAME = 'jbobie'
-        DOCKER_HUB_PASSWORD = 'J0e58t@me@@'
-        DOCKER_IMAGE_NAME = 'jbobie/weather'
+        DOCKER_HUB_PASSWORD = 'dckr_pat_1PIH9PM2EN5qQKwprENIc4SEA6k'
+        DOCKER_IMAGE_NAME = 'weather'
         DOCKER_IMAGE_TAG = 'latest'
     }
     
