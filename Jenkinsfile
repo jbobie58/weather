@@ -9,12 +9,6 @@ pipeline {
     }
     
     stages {
-        stage('Testing Stage') {
-            steps {
-                echo 'This is a testing stage.'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -61,10 +55,10 @@ pipeline {
     
     post {
         success {
-            echo 'Testing pipeline succeeded!'
+            echo 'Pipeline succeeded!'
         }
         failure {
-            echo 'Testing pipeline failed!'
+            echo 'Pipeline failed!'
         }
     }
 }
