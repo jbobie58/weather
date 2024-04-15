@@ -1,5 +1,12 @@
 pipeline {
     agent any
+
+    environment {
+        // Define your Docker Hub credentials
+        // DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+        DOCKER_IMAGE_NAME = 'weather'
+        DOCKER_IMAGE_TAG = 'latest'
+    }
     
     stages {
         stage('Testing Stage') {
@@ -12,16 +19,11 @@ pipeline {
             steps {
                 script {
                     def dockerfileDir = "/var/jenkins_home/workspace/weather_main/weather-microservice"
-                    def dockerImageName = 'weather:latest' // You can specify the tag here
+                    def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                     
-                    // Build Docker image from the local Dockerfile using sh
+                    // Build Docker image from the local Dockerfile
                     sh "docker build -t ${dockerImageName} ${dockerfileDir}"
                 }
-                // script {
-                //     // Modify the Docker image name to adhere to naming rules
-                //     def dockerImageName = "weather_1.0"
-                //     docker.build("-f /var/jenkins_home/workspace/weather_main/weather-microservice/Dockerfile -t ${dockerImageName} .")
-                // }
             }
         }
     }
