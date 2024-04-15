@@ -3,7 +3,9 @@ pipeline {
 
     environment {
         // Define your Docker Hub credentials
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+        // DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+        DOCKER_HUB_USERNAME = 'jbobie'
+        DOCKER_HUB_PASSWORD = 'J0e58t@me@@'
         DOCKER_IMAGE_NAME = 'weather'
         DOCKER_IMAGE_TAG = 'latest'
     }
@@ -31,7 +33,7 @@ pipeline {
                 script {
                     def dockerImageName = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                     
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD) {
                         // Push the Docker image to Docker Hub
                         docker.image(dockerImageName).push()
                     }
