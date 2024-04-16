@@ -1,6 +1,6 @@
 # values.yaml
 image:
-  repository: jenkins/jenkins
+  repository: jbobie/jenkins
   tag: lts-jdk11
 
 service:
